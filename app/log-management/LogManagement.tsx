@@ -138,14 +138,14 @@ const Header = () => {
 
         <h1 className="text-gradient z-[1] my-4 !p-3 text-2xl font-semibold tracking-tight dark:text-white sm:my-2 sm:my-5 sm:text-3xl md:leading-[3.5rem] lg:text-[44px]">
           Log Management at any Scale <br />
-          Powered by ClickHouse
+          Powered by a Columnar Database
         </h1>
 
         <p className="m-0 p-3 text-lg font-normal leading-8 text-signoz_vanilla-400 sm:p-0">
           Ingest logs from anywhere, quickly search and analyze with a powerful query builder, and
           correlate your
           <br className="hidden lg:inline" />
-          logs with other signals. Logs at SigNoz is powered by ClickHouse - a lightning-fast
+          logs with other signals. Logs at SigNoz is powered by a lightning-fast
           columnar datastore
           <br className="hidden lg:inline" />
           suited for storing logs at scale.
@@ -154,7 +154,7 @@ const Header = () => {
       <div className="relative z-[1] !mx-auto mx-2 flex !w-[100vw] flex-col items-center justify-center gap-3 border !border-b-0 !border-t-0 border-dashed border-signoz_slate-400 pb-12 pt-4 md:mx-5 md:!w-[80vw] md:flex-row">
         <Button id="btn-get-started-homepage-hero">
           <Link href="/teams/" className="flex-center">
-            Start your free trial
+            Get Started - Free
             <ArrowRight size={14} />
           </Link>
         </Button>
@@ -247,7 +247,7 @@ const TrustedByTeams = ({ page }) => {
 const SigNozFeatures = () => {
   const sections = [
     {
-      title: 'Logs at any scale powered by ClickHouse',
+      title: 'Logs at any scale powered by a Columnar Database',
       desc: (
         <>
           SigNoz uses ClickHouse (used by likes of Uber & Cloudflare) as datastore ⎯ an extremely
@@ -513,7 +513,7 @@ const SigNozStats = () => {
       name: 'OSS Downloads',
       value: '10 million+',
     },
-    { id: 2, logo: '/img/index_features/github.svg', name: 'GitHub Stars', value: '18k+' },
+    { id: 2, logo: '/img/index_features/github.svg', name: 'GitHub Stars', value: '22k+' },
     { id: 3, logo: '/img/index_features/contributions.svg', name: 'Contributors', value: '140+' },
     { id: 4, logo: '/img/index_features/community.svg', name: 'Community Members', value: '4.5k+' },
   ]

@@ -7,13 +7,15 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 // You might need to insert additional domains in script-src if you are using external services
 const ContentSecurityPolicy = `
   default-src 'self';
-  script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app https://www.googletagmanager.com https://js.hsforms.net https://f.vimeocdn.com;
-  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+  script-src 'self' 'unsafe-eval' 'unsafe-inline' giscus.app https://www.googletagmanager.com https://js.hsforms.net https://f.vimeocdn.com https://embed.lu.ma https://www.clarity.ms https://*.contentsquare.net http://*.contentsquare.net;
+  style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://embed.lu.ma;
   img-src * blob: data:;
   media-src *;
   connect-src *;
   font-src * 'self';
-  frame-src * giscus.app youtube.com
+  frame-src * giscus.app youtube.com;
+  worker-src 'self' blob:;
+  frame-ancestors 'self' https://signoz.io https://*.us.signoz.cloud https://*.in.signoz.cloud https://*.eu.signoz.cloud;
 `
 
 const securityHeaders = [
@@ -50,7 +52,7 @@ const securityHeaders = [
   // https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Feature-Policy
   {
     key: 'Permissions-Policy',
-    value: 'camera=(), microphone=(), geolocation=()',
+    value: 'camera=(), microphone=(), geolocation=(), clipboard-read=*, clipboard-write=*',
   },
 ]
 
@@ -94,7 +96,7 @@ module.exports = () => {
     async redirects() {
       return [
         {
-          source: '/docs',
+          source: '/docs/',
           destination: '/docs/introduction',
           permanent: true,
         },
@@ -129,49 +131,55 @@ module.exports = () => {
           permanent: true,
         },
         {
-          source: '/learn/user-stories',
+          source: '/learn/user-stories/',
           destination: '/observability-user-stories',
           permanent: true,
         },
         {
-          source: '/slack',
+          source: '/slack/',
           destination:
-            'https://join.slack.com/t/signoz-community/shared_invite/zt-2tgblijg2-eZCUAJnmp~G0ekNIv3se1A',
+            'https://join.slack.com/t/signoz-community/shared_invite/zt-35r3be4oh-~4ociQZPFeQJ2COfKvDPLQ',
           basePath: false,
           permanent: true,
         },
         {
-          source: '/docs/deployment/docker',
+          source: '/careers/',
+          destination: 'https://www.ycombinator.com/companies/signoz/jobs/',
+          basePath: false,
+          permanent: true,
+        },
+        {
+          source: '/docs/deployment/docker/',
           destination: '/docs/install/docker',
           permanent: true,
         },
         {
-          source: '/docs/deployment/docker_swarm',
+          source: '/docs/deployment/docker_swarm/',
           destination: '/docs/install/docker-swarm',
           permanent: true,
         },
         {
-          source: '/docs/deployment/helm_chart',
+          source: '/docs/deployment/helm_chart/',
           destination: '/docs/install/kubernetes',
           permanent: true,
         },
         {
-          source: '/docs/deployment/troubleshooting',
+          source: '/docs/deployment/troubleshooting/',
           destination: '/docs/install/troubleshooting',
           permanent: true,
         },
         {
-          source: '/docs/installation',
+          source: '/docs/installation/',
           destination: '/docs/install',
           permanent: true,
         },
         {
-          source: '/docs/userguide/metrics-dashboard',
+          source: '/docs/userguide/metrics-dashboard/',
           destination: '/docs/userguide/dashboards',
           permanent: true,
         },
         {
-          source: '/docs/operate/upgrade',
+          source: '/docs/operate/upgrade/',
           destination: '/docs/operate/migration/upgrade-0.8.0',
           permanent: true,
         },
@@ -191,7 +199,7 @@ module.exports = () => {
           permanent: true,
         },
         {
-          source: '/gh',
+          source: '/gh/',
           destination: 'https://github.com/SigNoz/signoz/',
           basePath: false,
           permanent: true,
@@ -237,7 +245,7 @@ module.exports = () => {
           permanent: true,
         },
         {
-          source: '/users',
+          source: '/users/',
           destination: '/workspace-setup/',
           permanent: false,
           has: [
@@ -368,7 +376,8 @@ module.exports = () => {
         },
         {
           source: '/docs/instrumentation/manual-instrumentation/javascript/nodejs/',
-          destination: '/docs/instrumentation/manual-instrumentation/javascript/opentelemetry-nodejs/',
+          destination:
+            '/docs/instrumentation/manual-instrumentation/javascript/opentelemetry-nodejs/',
           permanent: true,
         },
         {
@@ -394,6 +403,51 @@ module.exports = () => {
         {
           source: '/docs/frontend-monitoring/web-vitals/',
           destination: '/docs/frontend-monitoring/opentelemetry-web-vitals/',
+          permanent: true,
+        },
+        {
+          source: '/guides/unified-observability/',
+          destination: '/unified-observability/',
+          permanent: true,
+        },
+        {
+          source: '/docs/aws-monitoring/lambda-logs',
+          destination: '/docs/aws-monitoring/lambda/lambda-logs',
+          permanent: true,
+        },
+        {
+          source: '/docs/userguide/collecting_nodejs_winston_logs',
+          destination: '/docs/logs-management/send-logs/nodejs-winston-logs',
+          permanent: true,
+        },
+        {
+          source: '/docs/self-host/install',
+          destination: '/docs/install/self-host',
+          permanent: true,
+        },
+        {
+          source: '/comparisons/opentelemetry-vs-new-relic/',
+          destination: '/comparisons/opentelemetry-vs-newrelic/',
+          permanent: true,
+        },
+        {
+          source: '/blog/ten-reasons-not-to-add-observability/',
+          destination: '/blog/ten-reasons-not-add-observability/',
+          permanent: true,
+        },
+        {
+          source: '/blog/otel-webinar-opamp/',
+          destination: '/blog/opentelemetry-webinar-on-opamp/',
+          permanent: true,
+        },
+        {
+          source: '/docs/operate/0.75.0/query-service/user-invitation-setup/',
+          destination: '/docs/manage/administrator-guide/configuration/smtp-email-invitations/',
+          permanent: true,
+        },
+        {
+          source: '/docs/operate/query-service/user-invitation-smtp/',
+          destination: '/docs/manage/administrator-guide/configuration/smtp-email-invitations/',
           permanent: true,
         },
       ]

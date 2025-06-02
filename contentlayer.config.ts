@@ -22,6 +22,7 @@ import comparisonsRelatedArticles from './constants/comparisonsRelatedArticles.j
 import guidesRelatedArticles from './constants/guidesRelatedArticles.json'
 import opentelemetryRelatedArticles from './constants/opentelemetryRelatedArticles.json'
 import allAuthors from './constants/authors.json'
+import faqsRelatedArticles from './constants/faqsRelatedArticles.json'
 
 const isProduction = process.env.NODE_ENV === 'production'
 
@@ -162,6 +163,8 @@ export const Blog = defineDocumentType(() => ({
     hide_table_of_contents: { type: 'boolean', required: false },
     toc_min_heading_level: { type: 'number', required: false },
     toc_max_heading_level: { type: 'number', required: false },
+    cta_title: { type: 'string', required: false },
+    cta_text: { type: 'string', required: false },
   },
   computedFields: {
     ...computedFields,
@@ -221,6 +224,8 @@ export const Newsroom = defineDocumentType(() => ({
     hide_table_of_contents: { type: 'boolean', required: false },
     toc_min_heading_level: { type: 'number', required: false },
     toc_max_heading_level: { type: 'number', required: false },
+    cta_title: { type: 'string', required: false },
+    cta_text: { type: 'string', required: false },
   },
   computedFields: {
     ...computedFields,
@@ -279,6 +284,8 @@ export const Comparison = defineDocumentType(() => ({
     hide_table_of_contents: { type: 'boolean', required: false },
     toc_min_heading_level: { type: 'number', required: false },
     toc_max_heading_level: { type: 'number', required: false },
+    cta_title: { type: 'string', required: false },
+    cta_text: { type: 'string', required: false },
   },
   computedFields: {
     ...computedFields,
@@ -331,7 +338,9 @@ export const Opentelemetry = defineDocumentType(() => ({
     images: { type: 'json' },
     image: { type: 'string' },
     authors: { type: 'list', of: { type: 'string' } },
-    layout: { type: 'string' },
+    layout: { type: 'string', default: 'OpenTelemetryLayout' },
+    cta_title: { type: 'string', required: false },
+    cta_text: { type: 'string', required: false },
     bibliography: { type: 'string' },
     canonicalUrl: { type: 'string' },
     keywords: { type: 'list', of: { type: 'string' }, required: false },
@@ -518,9 +527,49 @@ export const CaseStudy = defineDocumentType(() => ({
   computedFields,
 }))
 
+export const FAQ = defineDocumentType(() => ({
+  name: 'FAQ',
+  filePathPattern: 'faqs/**/*.mdx',
+  contentType: 'mdx',
+  fields: {
+    title: { type: 'string', required: true },
+    date: { type: 'date', required: true },
+    tags: { type: 'list', of: { type: 'string' }, default: [] },
+    lastmod: { type: 'date' },
+    draft: { type: 'boolean' },
+    summary: { type: 'string' },
+    description: { type: 'string', required: true },
+    slug: { type: 'string', required: true },
+    authors: { type: 'list', of: { type: 'string' }, required: true },
+  },
+  computedFields: {
+    ...computedFields,
+    relatedArticles: {
+      type: 'json',
+      resolve: (doc) => getRelatedArticles(doc, faqsRelatedArticles),
+    },
+    structuredData: {
+      type: 'json',
+      resolve: (doc) => ({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: {
+          '@type': 'Question',
+          name: doc.title,
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: doc.description
+          }
+        },
+        url: `${siteMetadata.siteUrl}/faqs/${doc.slug}`,
+      }),
+    },
+  },
+}))
+
 export default makeSource({
   contentDirPath: 'data',
-  documentTypes: [Blog, Authors, Comparison, Guide, Opentelemetry, Doc, Newsroom, CaseStudy],
+  documentTypes: [Blog, Authors, Comparison, Guide, Opentelemetry, Doc, Newsroom, CaseStudy, FAQ],
   mdx: {
     cwd: process.cwd(),
     remarkPlugins: [

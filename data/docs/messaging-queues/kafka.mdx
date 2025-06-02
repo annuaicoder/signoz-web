@@ -8,7 +8,7 @@ id: kafka
 SigNoz. You will learn how to monitor brokers, topics, consumers, producers, and client interactions effectively. */}
 
 
-<figure data-zoomable align="center">
+{/* <figure data-zoomable align="center">
     <img
       src="/img/blog/2024/05/kafka-monitoring/request_flow.png"
       alt="A general request flow in a Kafka setup"
@@ -18,7 +18,7 @@ SigNoz. You will learn how to monitor brokers, topics, consumers, producers, and
         General request flow in a Kafka setup
       </i>
     </figcaption>
-</figure>
+</figure> */}
 
 
 ## Table of Contents
@@ -339,7 +339,7 @@ exporters:
     tls:
       insecure: false
     headers:
-      "signoz-access-token": "<SIGNOZ_INGESTION_KEY>"
+      "signoz-ingestion-key": "<SIGNOZ_INGESTION_KEY>"
   debug:
     verbosity: detailed
 
@@ -352,7 +352,7 @@ service:
 
 </TabItem>
 
-<TabItem value="Self-Hosted" label="Self-Hosted" default>
+<TabItem value='self-host' label="Self-Hosted" default>
 
 ```yaml
 receivers:

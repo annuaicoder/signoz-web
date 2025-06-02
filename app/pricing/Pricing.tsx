@@ -5,33 +5,17 @@ import React, { useState, useEffect } from 'react'
 import FAQBody from '../../components/FAQPricing'
 import styles from './styles.module.css'
 import { TrustedByTeams } from '@/components/trusted-by'
-import { CostComparison } from '@/components/cost-comparison'
-import { DataProtection } from '@/components/data-protection'
-import { TalkToExpert } from '@/components/talk-to-expert'
-import { CommunityEdition } from '@/components/community-edition'
-import { UserReview } from '@/components/user-review'
-import { TrySigNozCTA } from '@/components/try-signoz-cta'
 import WhySelectSignoz from '@/components/why-select-signoz'
 import { Testimonials } from '@/components/testimonials'
 import MonthlyEstimate from '@/components/Monthly-estimate/MonthlyEstimate'
 import MonthlyEstimateMobile from '@/components/Monthly-estimate/MonthlyEstimateMobile'
 import { GetStarted } from '@/components/GetStarted'
 import Link from 'next/link'
-import Divider from '@/components/ui/Divider'
 import Heading from '@/components/ui/Heading'
 import Button from '@/components/Button/Button'
 import Line from '@/components/ui/Line'
-import SubHeading from '@/components/ui/SubHeading'
-import { Chevron, RightSVG } from '@/components/svgs/common'
-import {
-  ArrowBigLeft,
-  ArrowRight,
-  MoveLeft,
-  ArrowUpRight,
-  ArrowDown,
-  Cloud,
-  Server,
-} from 'lucide-react'
+import { Chevron } from '@/components/svgs/common'
+import { ArrowRight, ArrowUpRight, ArrowDown, Cloud, Server } from 'lucide-react'
 import {
   CircleCheckSolid,
   CircleInfoSolid,
@@ -39,35 +23,33 @@ import {
   ClockSolid,
   CheckSolid,
   CrossSolid,
-  FlameSolid,
   CloudSolid,
   ServerSolid,
 } from '@/components/homepage-icons/icons'
-import {
-  Modal,
-  ModalContent,
-  ModalHeader,
-  ModalBody,
-  ModalFooter,
-  useDisclosure,
-} from '@nextui-org/react'
-import VimeoPlayer from '@/components/VimeoPlayer/VimeoPlayer'
+
 import SigNozCloudPricingOverview from '@/components/SigNozCloudPricingOverviewCard/SigNozCloudPricingOverview'
+import TrackingLink from '@/components/TrackingLink'
+import TrackingButton from '@/components/TrackingButton'
+import TrackingButtonSigNozTheme from '@/components/TrackingButtonSigNozTheme'
 
 const CloseButton = () => <div className="absolute right-0 top-0">Close</div>
 
 function Pricing() {
-  const [width, setWidth] = useState<number>(typeof window !== 'undefined' ? window.innerWidth : 0)
+  const [hasMounted, setHasMounted] = useState(false)
+  const [width, setWidth] = useState<number>(0) // Initialize to 0 to match server
 
-  function handleWindowSizeChange() {
-    setWidth(window.innerWidth)
-  }
   useEffect(() => {
+    setHasMounted(true)
+    setWidth(window.innerWidth) // Set actual width on client mount
+
+    function handleWindowSizeChange() {
+      setWidth(window.innerWidth)
+    }
     window.addEventListener('resize', handleWindowSizeChange)
     return () => {
       window.removeEventListener('resize', handleWindowSizeChange)
     }
-  }, [])
+  }, []) // Empty dependency array, runs once on mount
 
   const isMobile = width <= 768
 
@@ -94,7 +76,15 @@ function Pricing() {
         {/* More Options */}
         {/* <CommunityEdition /> */}
         {/* FAQ section */}
-        {isMobile ? <MonthlyEstimateMobile /> : <MonthlyEstimate />}
+        {hasMounted ? (
+          isMobile ? (
+            <MonthlyEstimateMobile />
+          ) : (
+            <MonthlyEstimate />
+          )
+        ) : (
+          <MonthlyEstimateMobile />
+        )}
         <WhySelectSignoz isInPricingPage />
         <FAQ />
         {/* User Review */}
@@ -232,8 +222,6 @@ const PricingPlans = () => {
 
   const [tab, setTab] = useState('cloud')
 
-  const { isOpen, onOpen, onOpenChange } = useDisclosure()
-
   const [width, setWidth] = useState<number>(typeof window !== 'undefined' ? window.innerWidth : 0)
 
   function handleWindowSizeChange() {
@@ -259,29 +247,34 @@ const PricingPlans = () => {
         <div className="mx-auto mb-5 flex max-w-4xl flex-col items-center text-center">
           <div className="absolute top-[-80px] z-[0] h-[7rem] !w-[80vw] border !border-l-0 !border-r-0 !border-t-0 border-dashed border-signoz_slate-400" />
           <Heading type={1} className="z-[1]">
-          Simple Usage-based Predictable 
-          Observability Costs
+            Simple Usage-based Predictable Observability Costs
           </Heading>
           <div className="hidden md:block">
-            <SigNozCloudPricingOverview className='w-full'/>
+            <SigNozCloudPricingOverview className="w-full" />
           </div>
           <div className="my-5 flex justify-center">
             <div className="flex">
-              <nav className={`flex items-center space-x-2 rounded-sm border border-signoz_slate-400`}>
-                <button
+              <nav
+                className={`flex items-center space-x-2 rounded-sm border border-signoz_slate-400`}
+              >
+                <TrackingButton
                   id="btn-signoz-cloud-pricing"
                   type="button"
                   className={`relative z-[2] cursor-pointer border-none ${
                     tab === 'cloud' ? 'bg-signoz_slate-400' : ''
                   } px-4 py-2 text-xs ${tab === 'cloud' ? 'text-white' : 'text-signoz_vanilla-400'}`}
                   onClick={() => setTab('cloud')}
+                  clickType="Tab Click"
+                  clickName="SigNoz Cloud Tab"
+                  clickLocation="Pricing Tabs"
+                  clickText="SigNoz cloud"
                 >
                   <div className="flex gap-1.5">
                     <Cloud size={14} />
                     SigNoz cloud
                   </div>
-                </button>
-                <button
+                </TrackingButton>
+                <TrackingButton
                   id="btn-hosted-in-your-infra-pricing"
                   type="button"
                   className={`ml-0 cursor-pointer border-none ${
@@ -290,12 +283,16 @@ const PricingPlans = () => {
                     tab === 'self-managed' ? 'text-white' : 'text-signoz_vanilla-400'
                   }`}
                   onClick={() => setTab('self-managed')}
+                  clickType="Tab Click"
+                  clickName="Hosted In Your Infra Tab"
+                  clickLocation="Pricing Tabs"
+                  clickText="Hosted in your infra"
                 >
                   <div className="relative z-[3] flex gap-1.5">
                     <Server size={14} />
                     Hosted in your infra
                   </div>
-                </button>
+                </TrackingButton>
               </nav>
             </div>
           </div>
@@ -317,16 +314,23 @@ const PricingPlans = () => {
                     <div className="w-3/5 border-b border-dashed border-signoz_slate-400" />
                     <div className="flex items-center gap-1.5">
                       <span className="text-base font-medium text-signoz_robin-300">
-                        $199/month
+                        <span className="line-through">$199</span> $49/month
                       </span>
                     </div>
                   </div>
                   <div>
                     <Button id="btn-get-started-pricing-teams-top" className="w-full">
-                      <Link href={'/teams/'} className="flex-center">
+                      <TrackingLink
+                        href={'/teams/'}
+                        className="flex-center"
+                        clickType="Primary CTA"
+                        clickName="Sign Up Button"
+                        clickText="Get started with SigNoz Cloud"
+                        clickLocation="Pricing Teams Cloud Tab Top"
+                      >
                         Get started with SigNoz Cloud
                         <ArrowRight size={14} />
-                      </Link>
+                      </TrackingLink>
                     </Button>
                   </div>
                 </div>
@@ -439,6 +443,14 @@ const PricingPlans = () => {
                       <div className="gap-3">
                         <CircleCheckSolid />
                         <span className="text-signoz_vanilla-400">
+                          Usage worth $49 (e.g. 163 GB logs/traces or 490 mn metric samples)
+                        </span>
+                      </div>
+                    </div>
+                    <div>
+                      <div className="gap-3">
+                        <CircleCheckSolid />
+                        <span className="text-signoz_vanilla-400">
                           Add as many teammates as you want.
                         </span>
                       </div>
@@ -450,44 +462,20 @@ const PricingPlans = () => {
                       </div>
                     </div>
 
-                    <div onClick={onOpen} style={{ cursor: 'pointer' }}>
-                      <div className="gap-3">
-                        <CircleInfoSolid />
-                        <span className="block items-center">
-                          What comes included in the $199?{' '}
-                          <ArrowUpRight size={20} className="inline" />
-                        </span>
-                      </div>
-                    </div>
-                    <Modal
-                      size={'5xl'}
-                      backdrop="blur"
-                      isOpen={isOpen}
-                      onOpenChange={onOpenChange}
-                      className="self-center"
-                    >
-                      <ModalContent className="bg-transparent">
-                        {() => (
-                          <>
-                            <ModalBody className="py-6">
-                              <VimeoPlayer videoId="968489758" />
-                              <p className="text-center text-signoz_vanilla-400 mt-4">
-                                Note: Usage-based pricing applies after crossing the $199 mark
-                              </p>
-                            </ModalBody>
-                          </>
-                        )}
-                      </ModalContent>
-                    </Modal>
-
                     <div>
                       <div className="gap-3">
                         <CircleInfoSolid />
                         <span>
-                          <Link href={'/pricing/metrics-cost-estimation/'}>
+                          <TrackingLink
+                            href={'/pricing/metrics-cost-estimation/'}
+                            clickType="Nav Click"
+                            clickName="Metrics Pricing Calculator Button"
+                            clickText="Learn how the price for metrics is calculated"
+                            clickLocation="Pricing Teams Cloud Tab"
+                          >
                             Learn how the price for metrics is calculated{' '}
                             <ArrowUpRight size={20} className="inline" />
-                          </Link>
+                          </TrackingLink>
                         </span>
                       </div>
                     </div>
@@ -496,10 +484,16 @@ const PricingPlans = () => {
                       <div className="gap-3">
                         <CircleInfoSolid />
                         <span>
-                          <Link href={'/docs/logs-management/long-term-storage/'}>
+                          <TrackingLink
+                            href={'/docs/logs-management/long-term-storage/'}
+                            clickType="Nav Click"
+                            clickName="Long Term Logs Storage Link"
+                            clickText="Long term Logs Storage options"
+                            clickLocation="Pricing Teams Cloud Tab"
+                          >
                             Long term Logs Storage options{' '}
                             <ArrowUpRight size={20} className="inline" />
-                          </Link>
+                          </TrackingLink>
                         </span>
                       </div>
                     </div>
@@ -565,7 +559,19 @@ const PricingPlans = () => {
                       </li>
                       <li className="mb-3 flex items-center gap-3">
                         {' '}
+                        <CircleCheckSolid /> OTel-Native Messaging Queue Monitoring
+                      </li>
+                      <li className="mb-3 flex items-center gap-3">
+                        {' '}
+                        <CircleCheckSolid /> Correlation of Signals
+                      </li>
+                      <li className="mb-3 flex items-center gap-3">
+                        {' '}
                         <CircleCheckSolid /> SSO and SAML Support
+                      </li>
+                      <li className="mb-3 flex items-center gap-3">
+                        {' '}
+                        <CircleCheckSolid /> Anomaly Detection
                       </li>
                       <li className="mb-3 flex items-center gap-3">
                         {' '}
@@ -585,7 +591,7 @@ const PricingPlans = () => {
                       </li>
                       <li className="mb-3 flex items-center gap-3">
                         {' '}
-                        <CircleCheckSolid /> Unlimited Logs & Traces based Dashboards
+                        <CircleCheckSolid /> Unlimited Logs, Metrics & Traces based Dashboards
                       </li>
                       <li className="mb-3 flex items-center gap-3">
                         {' '}
@@ -627,48 +633,40 @@ const PricingPlans = () => {
                 </div>
                 <div className="">
                   <Button id="btn-get-started-pricing-teams-bottom" className="w-full">
-                    <Link href={'/teams/'} className="flex-center">
+                    <TrackingLink
+                      href={'/teams/'}
+                      className="flex-center"
+                      clickType="Primary CTA"
+                      clickName="Sign Up Button"
+                      clickText="Get started with SigNoz Cloud"
+                      clickLocation="Pricing Teams Cloud Tab Bottom"
+                    >
                       Get started with SigNoz Cloud
                       <ArrowRight size={14} />
-                    </Link>
+                    </TrackingLink>
                   </Button>
                 </div>
 
-                {isMobile ? (
-                  <div className="mt-3">
-                    <Button
-                      id="btn-estimate-monthly-bill-pricing-teams"
-                      className="w-full"
-                      type={Button.TYPES.SECONDARY}
-                      onClick={() => {
-                        const element = document.getElementById('estimate-your-monthly-bill')
-                        element?.scrollIntoView({
-                          behavior: 'smooth',
-                        })
-                      }}
-                    >
-                      Estimate your monthly bill
-                      <ArrowDown size={14} />
-                    </Button>
-                  </div>
-                ) : (
-                  <div className="my-3">
-                    <Button
-                      id="btn-estimate-monthly-bill-pricing-teams"
-                      className="w-full"
-                      type={Button.TYPES.SECONDARY}
-                      onClick={() => {
-                        const element = document.getElementById('estimate-your-monthly-bill')
-                        element?.scrollIntoView({
-                          behavior: 'smooth',
-                        })
-                      }}
-                    >
-                      Estimate your monthly bill
-                      <ArrowDown size={14} />
-                    </Button>
-                  </div>
-                )}
+                <div className="mt-3 md:my-3">
+                  <TrackingButtonSigNozTheme
+                    id="btn-estimate-monthly-bill-pricing-teams"
+                    className="w-full"
+                    type={Button.TYPES.SECONDARY}
+                    onClick={() => {
+                      const element = document.getElementById('estimate-your-monthly-bill')
+                      element?.scrollIntoView({
+                        behavior: 'smooth',
+                      })
+                    }}
+                    clickType="Secondary CTA"
+                    clickName="Pricing Calculator Button"
+                    clickText="Estimate your monthly bill"
+                    clickLocation="Pricing Teams Cloud Tab Bottom"
+                  >
+                    Estimate your monthly bill
+                    <ArrowDown size={14} />
+                  </TrackingButtonSigNozTheme>
+                </div>
               </div>
               <div className="pricing-card !mb-0 border !border-b-0 !border-r-0 border-dashed border-signoz_slate-400 bg-opacity-5 px-4 py-5 max-sm:!border-l-0 md:px-8">
                 <div>
@@ -678,6 +676,15 @@ const PricingPlans = () => {
                   <p className="mb-4 text-base leading-relaxed text-gray-400">
                     For larger orgs with advanced security, compliance and support.
                   </p>
+                  <div className="mb-6 flex items-center justify-between">
+                    <p className="m-0 min-w-[72px]">Starts at</p>
+                    <div className="w-3/5 border-b border-dashed border-signoz_slate-400" />
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-base font-medium text-signoz_robin-300">
+                        $4000/Month
+                      </span>
+                    </div>
+                  </div>
                   <div className="mb-6 flex items-center gap-3">
                     <ZapSolid />
                     <p className="m-0">Flexible Pricing for scale and long term commitments</p>
@@ -688,11 +695,29 @@ const PricingPlans = () => {
                       type={Button.TYPES.SECONDARY}
                       id="btn-contact-us-pricing-enterprise-top"
                     >
-                      <Link href={'/enterprise-cloud/'} className="flex-center">
+                      <TrackingLink
+                        href={'/enterprise-cloud/'}
+                        className="flex-center"
+                        clickType="Secondary CTA"
+                        clickName="Enterprise Cloud Contact Button"
+                        clickText="Contact us"
+                        clickLocation="Pricing Enterprise Cloud Tab Top"
+                      >
                         Contact us
                         <ArrowRight size={14} />
-                      </Link>
+                      </TrackingLink>
                     </Button>
+                    <div className="mt-4 text-center text-sm text-signoz_robin-300 hover:text-signoz_robin-400">
+                      <Link
+                        href={'/enterprise/'}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center"
+                      >
+                        Check All Enterprise Plans
+                        <ArrowUpRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </div>
                   </div>
                 </div>
                 <div className="__card__body">
@@ -778,10 +803,6 @@ const PricingPlans = () => {
                         {' '}
                         <CircleCheckSolid /> VPC Peering
                       </li>
-                      <li className="mb-3 flex items-center gap-3">
-                        {' '}
-                        <CircleCheckSolid /> Query API Keys (access data from anywhere)
-                      </li>
                     </ul>
                   </div>
                   {/* <div className={styles.packageDetailBlock}>
@@ -824,11 +845,29 @@ const PricingPlans = () => {
                     type={Button.TYPES.SECONDARY}
                     id="btn-contact-us-pricing-enterprise-bottom"
                   >
-                    <Link href={'/enterprise-cloud/'} className="flex-center">
+                    <TrackingLink
+                      href={'/enterprise-cloud/'}
+                      className="flex-center"
+                      clickType="Primary CTA"
+                      clickName="Enterprise Cloud Contact Button"
+                      clickText="Contact us"
+                      clickLocation="Pricing Enterprise Cloud Tab Bottom"
+                    >
                       Contact us
                       <ArrowRight size={14} />
-                    </Link>
+                    </TrackingLink>
                   </Button>
+                  <div className="mt-4 text-center text-sm text-signoz_robin-300 hover:text-signoz_robin-400">
+                    <Link
+                      href={'/enterprise/'}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center"
+                    >
+                      Check All Enterprise Plans
+                      <ArrowUpRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -839,17 +878,26 @@ const PricingPlans = () => {
             <div className="pricing-plans mx-[8px] grid max-w-[100vw] grid-cols-1 justify-center gap-y-10 md:!max-w-[calc(80vw-24px)] lg:max-w-6xl lg:grid-cols-2">
               <div className="pricing-card !mb-0 border !border-b-0 !border-l-0 !border-r-0 border-dashed border-signoz_slate-400 bg-opacity-5 px-4 py-5 md:px-8 ">
                 <div>
-                  <h3 className="font-heading pinkish-gradient text-2xl font-bold">Community Edition</h3>
+                  <h3 className="font-heading pinkish-gradient text-2xl font-bold">
+                    Community Edition
+                  </h3>
                   <p className="mb-4 text-base leading-relaxed text-gray-400">Free to Self Host</p>
                   <div className="flex items-center gap-3">
                     <p>Install in your infra</p>
                   </div>
                   <div>
                     <Button className="w-full" id="btn-documentation-pricing-community-edition-top">
-                      <Link href={'/docs/install/'} className="flex-center">
+                      <TrackingLink
+                        href={'/docs/install/'}
+                        className="flex-center"
+                        clickType="Primary CTA"
+                        clickName="Docs Link"
+                        clickText="Documentation"
+                        clickLocation="Pricing Community Edition Tab Top"
+                      >
                         Documentation
                         <ArrowRight size={14} />
-                      </Link>
+                      </TrackingLink>
                     </Button>
                   </div>
                 </div>
@@ -887,19 +935,45 @@ const PricingPlans = () => {
                         {' '}
                         <CircleCheckSolid /> Alerts Management
                       </li>
-                      <li className="mb-6 flex items-center gap-3">
+                      <li className="mb-3 flex items-center gap-3">
+                        {' '}
+                        <CircleCheckSolid /> OTel-Native Messaging Queue Monitoring
+                      </li>
+                      <li className="mb-3 flex items-center gap-3">
+                        {' '}
+                        <CircleCheckSolid /> Correlation of Signals
+                      </li>
+                      <li className="mb-3 flex items-center gap-3">
                         {' '}
                         <CircleCheckSolid /> Service Dependency Visualization
+                      </li>
+                      <li className="mb-3 flex items-center gap-3">
+                        {' '}
+                        <CircleCheckSolid /> Unlimited Logs, Metrics & Traces based Dashboards
+                      </li>
+                      <li className="mb-6 flex items-center gap-3">
+                        {' '}
+                        <CircleCheckSolid /> Visualize very large traces
+                        <span className="rounded-full border border-none bg-signoz_slate-400 px-2 py-1 text-center !text-[10px] uppercase text-signoz_vanilla-400">
+                          &gt;10k spans
+                        </span>
                       </li>
                     </ul>
                   </div>
                 </div>
                 <div>
                   <Button className="w-full" id="btn-documentation-pricing-community-edition-top">
-                    <Link href={'/docs/install/'} className="flex-center">
+                    <TrackingLink
+                      href={'/docs/install/'}
+                      className="flex-center"
+                      clickType="Primary CTA"
+                      clickName="Docs Link"
+                      clickText="Documentation"
+                      clickLocation="Pricing Community Edition Tab Bottom"
+                    >
                       Documentation
                       <ArrowRight size={14} />
-                    </Link>
+                    </TrackingLink>
                   </Button>
                 </div>
               </div>
@@ -916,7 +990,7 @@ const PricingPlans = () => {
                     <div className="w-3/5 border-b border-dashed border-signoz_slate-400" />
                     <div className="flex items-center gap-1.5">
                       <span className="text-base font-medium text-signoz_robin-300">
-                        $2500/Month
+                        $4000/Month
                       </span>
                     </div>
                   </div>
@@ -926,11 +1000,29 @@ const PricingPlans = () => {
                       type={Button.TYPES.SECONDARY}
                       id="btn-contact-us-pricing-enterprise-edition-top"
                     >
-                      <Link href={'/enterprise/'} className="flex-center">
+                      <TrackingLink
+                        href={'/enterprise-self-hosted'}
+                        className="flex-center"
+                        clickType="Secondary CTA"
+                        clickName="Self Hosted Enterprise Contact Button"
+                        clickText="Contact us"
+                        clickLocation="Pricing Self Hosted Enterprise Edition Tab Top"
+                      >
                         Contact us
                         <ArrowRight size={14} />
-                      </Link>
+                      </TrackingLink>
                     </Button>
+                    <div className="mt-4 text-center text-sm text-signoz_robin-300 hover:text-signoz_robin-400">
+                      <Link
+                        href={'/enterprise/'}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="flex items-center justify-center"
+                      >
+                        Check All Enterprise Plans
+                        <ArrowUpRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </div>
                   </div>
 
                   <p className="mb-4 text-base leading-relaxed text-gray-400"></p>
@@ -1016,13 +1108,6 @@ const PricingPlans = () => {
                       </li>
                       <li className="mb-3 flex items-center gap-3">
                         {' '}
-                        <CircleCheckSolid /> Visualize very large traces
-                        <span className="rounded-full border border-none bg-signoz_slate-400 px-2 py-1 text-center !text-[10px] uppercase text-signoz_vanilla-400">
-                          &gt;10k spans
-                        </span>
-                      </li>
-                      <li className="mb-3 flex items-center gap-3">
-                        {' '}
                         <CircleCheckSolid /> Security tightening for on-prem installation
                       </li>
                       <li className="mb-3 flex items-center gap-3">
@@ -1063,11 +1148,29 @@ const PricingPlans = () => {
                     type={Button.TYPES.SECONDARY}
                     id="btn-contact-us-pricing-enterprise-edition-bottom"
                   >
-                    <Link href={'/enterprise/'} className="flex-center">
+                    <TrackingLink
+                      href={'/enterprise-self-hosted/'}
+                      className="flex-center"
+                      clickType="Secondary CTA"
+                      clickName="Self Hosted Enterprise Contact Button"
+                      clickText="Contact us"
+                      clickLocation="Pricing Self Hosted Enterprise Edition Tab Bottom"
+                    >
                       Contact us
                       <ArrowRight size={14} />
-                    </Link>
+                    </TrackingLink>
                   </Button>
+                  <div className="mt-4 text-center text-sm text-signoz_robin-300 hover:text-signoz_robin-400">
+                    <Link
+                      href={'/enterprise/'}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center"
+                    >
+                      Check All Enterprise Plans
+                      <ArrowUpRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1088,39 +1191,51 @@ const ExploreAllFeature = () => {
         heading: 'Community Edition',
         desc: '$0 ⎯ host in your infra',
         action: (
-          <Link
-            id="btn-documentation-pricing-table"
+          <TrackingLink
             href={'/docs/introduction'}
             className="button-background flex h-8 w-full items-center justify-center gap-1.5 truncate rounded-full px-4 py-2 text-center text-[7px] font-medium leading-5 text-white sm:text-sm"
+            clickType="Secondary CTA"
+            clickName="Docs Link"
+            clickText="Read Documentation"
+            clickLocation="Explore All Features Table"
+            id="btn-documentation-pricing-table"
           >
-            Read Documenation
-          </Link>
+            Read Documentation
+          </TrackingLink>
         ),
       },
       {
         heading: 'Teams',
-        desc: 'Cloud ⎯ starts at $199/mo',
+        desc: 'Cloud ⎯ starts at $49/mo',
         action: (
-          <Link
-            id="btn-get-started-pricing-table"
+          <TrackingLink
             href={'/teams/'}
             className="flex h-8 w-full items-center justify-center gap-1.5 truncate rounded-full bg-signoz_robin-500 px-4 py-2 text-center text-[9px] font-medium leading-5 text-white sm:text-sm"
+            clickType="Secondary CTA"
+            clickName="Sign Up Button"
+            clickText="Get Started"
+            clickLocation="Explore All Features Table"
+            id="btn-get-started-pricing-table"
           >
             Get Started
-          </Link>
+          </TrackingLink>
         ),
       },
       {
         heading: 'Enterprise',
         desc: 'Cloud /  Self-Hosted',
         action: (
-          <Link
-            id="btn-contact-us-pricing-table"
+          <TrackingLink
             href={'/enterprise-cloud/'}
             className="button-background flex h-8 w-full items-center justify-center gap-1.5 rounded-full px-4 py-2 text-center text-[9px] font-medium text-white sm:text-sm"
+            clickType="Secondary CTA"
+            clickName="Contact Us Button"
+            clickText="Contact Us"
+            clickLocation="Explore All Features Table"
+            id="btn-contact-us-pricing-table"
           >
             Contact Us
-          </Link>
+          </TrackingLink>
         ),
       },
     ],
@@ -1154,12 +1269,7 @@ const ExploreAllFeature = () => {
           },
           {
             feature: 'Advanced visualization for very large traces (>10K spans)',
-            inCommunity: (
-              <div className="flex flex-col items-center justify-center">
-                <CrossSolid />
-                {/* <small>(Limited to 5 dashboard panels & alerts)</small> */}
-              </div>
-            ),
+            inCommunity: <CheckSolid />,
             inTeams: <CheckSolid />,
             inEnterprise: <CheckSolid />,
           },
@@ -1256,6 +1366,12 @@ const ExploreAllFeature = () => {
             inEnterprise: <CheckSolid />,
           },
           {
+            feature: 'Anomaly Detection',
+            inCommunity: <CrossSolid />,
+            inTeams: <CheckSolid />,
+            inEnterprise: <CheckSolid />,
+          },
+          {
             feature: 'Alert as Code',
             inCommunity: <CrossSolid />,
             inTeams: <CheckSolid />,
@@ -1263,7 +1379,47 @@ const ExploreAllFeature = () => {
           },
           {
             feature: 'MS Teams as alert channel',
-            inCommunity: <CrossSolid />,
+            inCommunity: <CheckSolid />,
+            inTeams: <CheckSolid />,
+            inEnterprise: <CheckSolid />,
+          },
+        ],
+      },
+      {
+        section: 'OTel-native Messaging Queue Monitoring',
+        features: [
+          {
+            feature: 'Producer Latency, Consumer Lag, Partition Latency Views',
+            inCommunity: <CheckSolid />,
+            inTeams: <CheckSolid />,
+            inEnterprise: <CheckSolid />,
+          },
+        ],
+      },
+      {
+        section: 'Correlation of Signals',
+        features: [
+          {
+            feature: 'APM metrics to traces',
+            inCommunity: <CheckSolid />,
+            inTeams: <CheckSolid />,
+            inEnterprise: <CheckSolid />,
+          },
+          {
+            feature: 'Traces to logs',
+            inCommunity: <CheckSolid />,
+            inTeams: <CheckSolid />,
+            inEnterprise: <CheckSolid />,
+          },
+          {
+            feature: 'Logs to traces',
+            inCommunity: <CheckSolid />,
+            inTeams: <CheckSolid />,
+            inEnterprise: <CheckSolid />,
+          },
+          {
+            feature: 'Logs to infrastructure metrics',
+            inCommunity: <CheckSolid />,
             inTeams: <CheckSolid />,
             inEnterprise: <CheckSolid />,
           },
@@ -1295,7 +1451,13 @@ const ExploreAllFeature = () => {
         section: 'Configuration',
         features: [
           {
-            feature: 'SSO/SAML support',
+            feature: 'SSO Support',
+            inCommunity: <CheckSolid />,
+            inTeams: <CheckSolid />,
+            inEnterprise: <CheckSolid />,
+          },
+          {
+            feature: 'SAML Support',
             inCommunity: <CrossSolid />,
             inTeams: <CheckSolid />,
             inEnterprise: <CheckSolid />,
@@ -1320,7 +1482,7 @@ const ExploreAllFeature = () => {
           },
           {
             feature: 'Access Data in SigNoz from Anywhere (via API keys)',
-            inCommunity: <CrossSolid />,
+            inCommunity: <CheckSolid />,
             inTeams: <CheckSolid />,
             inEnterprise: <CheckSolid />,
           },

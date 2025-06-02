@@ -1,30 +1,130 @@
 const docsSideNav = [
   {
+    type: 'doc',
+    label: 'Get Started',
+    route: '/docs',
+  },
+  {
     type: 'category',
     isExpanded: false,
-    label: 'Introduction',
-    route: '/docs',
+    label: 'Overview',
     items: [
       {
         type: 'doc',
         label: 'What is SigNoz?',
-        route: '/docs/introduction',
+        route: '/docs/what-is-signoz',
+      },
+      {
+        label: 'SigNoz Features',
+        type: 'category',
+        isExpanded: false,
+        items: [
+          {
+            type: 'doc',
+            route: '/docs/product-features/query-builder',
+            label: 'Query Builder',
+          },
+          {
+            type: 'doc',
+            route: '/docs/product-features/alert-management',
+            label: 'Alert Management',
+          },
+          {
+            type: 'doc',
+            route: '/docs/product-features/trace-explorer',
+            label: 'Trace Explorer',
+          },
+          {
+            type: 'doc',
+            route: '/docs/product-features/logs-explorer',
+            label: 'Logs Explorer',
+          },
+          {
+            type: 'doc',
+            route: '/docs/product-features/saved-view',
+            label: 'Saved View',
+            // className: 'new-doc', // Add this if you want to add a new tag in sidebar
+          },
+          {
+            type: 'doc',
+            route: '/docs/product-features/invite-team-member',
+            label: 'Invite Team Member',
+          },
+        ],
+      },
+      {
+        type: 'category',
+        label: 'Breaking Changes',
+        isExpanded: false,
+        items: [
+          {
+            type: 'doc',
+            label: 'Breaking Changes in v0.76',
+            route: '/docs/overview/breaking-changes/breaking-changes-0.76',
+          },
+        ],
+      },
+      {
+        type: 'category',
+        label: "What's New",
+        isExpanded: false,
+        items: [
+          {
+            type: 'doc',
+            label: 'Changelog of v0.76',
+            route: '/docs/overview/whats-new/changelog-0.76',
+          },
+        ],
+      },
+      {
+        type: 'doc',
+        label: "What's Coming",
+        route: '/docs/roadmap',
+      },
+      {
+        type: 'category',
+        label: 'Core Concepts',
+        route: '/docs/overview/core-concepts/overview',
+        isExpanded: false,
+        items: [
+          {
+            type: 'doc',
+            label: 'Architecture',
+            route: '/docs/architecture',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    type: 'category',
+    isExpanded: false,
+    label: 'Setup',
+    route: '/docs/install/',
+    items: [
+      {
+        type: 'category',
+        isExpanded: false,
+        label: 'SigNoz Cloud',
+        route: '/docs/cloud',
+        items: [
+          {
+            type: 'doc',
+            route: '/docs/cloud/quickstart',
+            label: 'Quickstart',
+          },
+        ],
       },
       {
         type: 'category',
         isExpanded: false,
-        label: 'Get Started',
-        route: '/docs/install',
+        label: 'Self-Host SigNoz',
+        route: '/docs/install/self-host',
         items: [
-          {
-            type: 'doc',
-            route: '/docs/cloud',
-            label: 'SigNoz Cloud',
-          },
           {
             type: 'category',
             isExpanded: false,
-            label: 'Self-Host SigNoz',
+            label: 'Install on Docker',
             items: [
               {
                 type: 'doc',
@@ -37,100 +137,364 @@ const docsSideNav = [
                 route: '/docs/install/docker-swarm',
               },
               {
-                type: 'category',
-                isExpanded: false,
-                label: 'Kubernetes',
-                route: '/docs/install/kubernetes',
-                items: [
-                  {
-                    type: 'doc',
-                    label: 'Deploying to AWS',
-                    route: '/docs/install/kubernetes/aws',
-                  },
-                  {
-                    type: 'doc',
-                    label: 'Deploying to GCP',
-                    route: '/docs/install/kubernetes/gcp',
-                  },
-                  {
-                    type: 'doc',
-                    label: 'Other Platform',
-                    route: '/docs/install/kubernetes/others',
-                  },
-                ],
-              },
-              {
                 type: 'doc',
-                label: 'Troubleshooting',
-                route: '/docs/install/troubleshooting',
+                label: 'Docker SELinux',
+                route: '/docs/install/docker-selinux',
               },
             ],
           },
-
+          {
+            type: 'category',
+            label: 'Install Binary',
+            isExpanded: false,
+            items: [
+              {
+                type: 'doc',
+                label: 'Linux',
+                route: '/docs/install/linux',
+                className: 'new-doc',
+              },
+            ],
+          },
           {
             type: 'category',
             isExpanded: false,
-            label: 'Install OTel collector',
+            label: 'Install on Kubernetes',
+            route: '/docs/install/kubernetes',
             items: [
               {
-                route: '/docs/tutorial/opentelemetry-binary-usage-in-virtual-machine',
                 type: 'doc',
-                label: 'VM',
+                label: 'Deploying to AWS',
+                route: '/docs/install/kubernetes/aws',
               },
               {
-                route: '/docs/tutorial/kubernetes-infra-metrics',
                 type: 'doc',
-                label: 'Kubernetes',
+                label: 'Deploying to GCP',
+                route: '/docs/install/kubernetes/gcp',
+              },
+              {
+                type: 'doc',
+                label: 'Deploying to AKS',
+                route: '/docs/install/kubernetes/aks',
+              },
+              {
+                type: 'doc',
+                label: 'Deploying to Digital Ocean',
+                route: '/docs/install/digital-ocean',
+              },
+              {
+                type: 'doc',
+                label: 'Other Platform',
+                route: '/docs/install/kubernetes/others',
+              },
+              {
+                type: 'doc',
+                label: 'Deploying to Local',
+                route: '/docs/install/kubernetes/local',
+              },
+              {
+                type: 'doc',
+                label: 'Deploying with ArgoCD',
+                route: '/docs/install/argocd',
               },
             ],
+          },
+          {
+            type: 'doc',
+            label: 'Troubleshooting',
+            route: '/docs/install/troubleshooting',
+          },
+        ],
+      },
+
+      {
+        type: 'category',
+        isExpanded: false,
+        label: 'Install OTel collector',
+        items: [
+          {
+            route: '/docs/tutorial/opentelemetry-binary-usage-in-virtual-machine',
+            type: 'doc',
+            label: 'VM',
+          },
+          {
+            route: '/docs/tutorial/kubernetes-infra-metrics',
+            type: 'doc',
+            label: 'Kubernetes',
           },
         ],
       },
     ],
   },
+
   {
-    label: 'SigNoz Features',
     type: 'category',
+    label: 'Manage',
     isExpanded: false,
+    route: '/docs/manage/overview',
     items: [
       {
-        type: 'doc',
-        route: '/docs/product-features/query-builder',
-        label: 'Query Builder',
-      },
-      {
-        type: 'doc',
-        route: '/docs/product-features/alert-management',
-        label: 'Alert Management',
-      },
-      {
-        type: 'doc',
-        route: '/docs/product-features/trace-explorer',
-        label: 'Trace Explorer',
-      },
-      {
-        type: 'doc',
-        route: '/docs/product-features/logs-explorer',
-        label: 'Logs Explorer',
-      },
-      {
-        type: 'doc',
-        route: '/docs/product-features/saved-view',
-        label: 'Saved View',
-        // className: 'new-doc', // Add this if you want to add a new tag in sidebar
-      },
-      {
-        type: 'doc',
-        route: '/docs/product-features/invite-team-member',
-        label: 'Invite Team Member',
+        label: 'Administrator Guides (Self-hosted)',
+        type: 'category',
+        isExpanded: false,
+        route: '/docs/manage/administrator-guide',
+        items: [
+          {
+            type: 'category',
+            isExpanded: false,
+            label: 'Migration Guides',
+            route: '/docs/operate/migration',
+            // link: {
+            // type: 'generated-index',
+            // title: 'Migration Guides',
+            // description:
+            // 'The following sections provide instructions to migrate SigNoz components across newer versions. You need to run these migration scripts step by step. For example if you are currently on `0.8.2` and want to migrate to `0.10.0` - you need to run migration script for `0.9` first and then `0.10`',
+            // slug: '/docs/operate/migration/migration',
+            // },
+            items: [
+              {
+                type: 'doc',
+                route: '/docs/operate/migration/upgrade-0.76',
+                label: 'Upgrade to v0.76',
+              },
+              {
+                type: 'doc',
+                route: '/docs/operate/migration/upgrade-0.70',
+                label: 'Upgrade to v0.70',
+              },
+              {
+                type: 'doc',
+                route: '/docs/operate/migration/upgrade-0.64',
+                label: 'Upgrade to v0.64',
+              },
+              {
+                type: 'doc',
+                route: '/docs/operate/migration/upgrade-0.55',
+                label: 'Upgrade to v0.55',
+              },
+              {
+                type: 'doc',
+                route: '/docs/operate/migration/upgrade-0.51',
+                label: 'Upgrade to v0.51',
+              },
+              {
+                type: 'doc',
+                route: '/docs/operate/migration/upgrade-0.49',
+                label: 'Upgrade to v0.49',
+              },
+              {
+                type: 'doc',
+                route: '/docs/operate/migration/upgrade-0.45',
+                label: 'Upgrade to v0.45',
+              },
+              {
+                type: 'doc',
+                route: '/docs/operate/migration/upgrade-0.38',
+                label: 'Upgrade to v0.38',
+              },
+              {
+                type: 'doc',
+                route: '/docs/operate/migration/upgrade-0.36',
+                label: 'Upgrade to v0.36',
+              },
+              {
+                type: 'doc',
+                route: '/docs/operate/migration/upgrade-0.27',
+                label: 'Upgrade to v0.27',
+              },
+              {
+                type: 'doc',
+                route: '/docs/operate/migration/upgrade-0.23',
+                label: 'Upgrade to v0.23',
+              },
+              {
+                type: 'doc',
+                route: '/docs/operate/migration/upgrade-0.19',
+                label: 'Upgrade to v0.19',
+              },
+              {
+                type: 'doc',
+                route: '/docs/operate/migration/upgrade-0.12',
+                label: 'Upgrade to v0.12',
+              },
+              {
+                type: 'doc',
+                route: '/docs/operate/migration/upgrade-0.10',
+                label: 'Upgrade to v0.10',
+              },
+              {
+                type: 'doc',
+                route: '/docs/operate/migration/upgrade-0.9',
+                label: 'Upgrade to v0.9',
+              },
+              {
+                type: 'doc',
+                route: '/docs/operate/migration/upgrade-0.8.1',
+                label: 'Upgrade to v0.8.1',
+              },
+              {
+                type: 'doc',
+                route: '/docs/operate/migration/upgrade-0.8.0',
+                label: 'Upgrade to v0.8.0',
+              },
+            ],
+          },
+          {
+            type: 'category',
+            isExpanded: false,
+            label: 'ClickHouse',
+            route: '/docs/operate/clickhouse',
+            // link: {
+            // type: 'generated-index',
+            // title: 'ClickHouse',
+            // description:
+            // 'The following sections provide instructions to operate ClickHouse. Based on your environment, proceed to one of the sections below.',
+            // slug: '/operate/clickhouse/clickhouse',
+            // },
+            items: [
+              {
+                type: 'category',
+                route: '/docs/operate/clickhouse/distributed-clickhouse',
+                label: 'Distributed ClickHouse',
+                isExpanded: false,
+                items: [
+                  {
+                    type: 'doc',
+                    route:
+                      '/docs/manage/administrator-guide/clickhouse/distributed-clickhouse/docker',
+                    label: 'Docker',
+                  },
+                  {
+                    type: 'doc',
+                    route:
+                      '/docs/manage/administrator-guide/clickhouse/distributed-clickhouse/docker-swarm',
+                    label: 'Docker Swarm',
+                  },
+                  {
+                    type: 'doc',
+                    route:
+                      '/docs/manage/administrator-guide/clickhouse/distributed-clickhouse/kubernetes',
+                    label: 'Kubernetes',
+                  },
+                ],
+              },
+              {
+                type: 'doc',
+                route: '/docs/operate/clickhouse/increase-clickhouse-pv',
+                label: 'Increase ClickHouse PV',
+              },
+              {
+                type: 'doc',
+                route: '/docs/operate/clickhouse/connect-to-clickhouse',
+                label: 'Connect to ClickHouse',
+              },
+
+              {
+                type: 'doc',
+                route: '/docs/operate/clickhouse/external-clickhouse',
+                label: 'External ClickHouse',
+              },
+              {
+                type: 'doc',
+                route: '/docs/tutorial/writing-clickhouse-queries-in-dashboard',
+                label: 'ClickHouse queries for building dashboards and alerts',
+              },
+            ],
+          },
+          {
+            label: 'Security & Compliance',
+            type: 'category',
+            isExpanded: false,
+            // route: '',
+            items: [
+              //     'userguide/overview',
+              {
+                type: 'doc',
+                route: '/docs/userguide/authentication',
+                label: 'Authentication',
+              },
+              {
+                type: 'doc',
+                route: '/docs/userguide/sso-authentication',
+                label: 'SSO',
+              },
+              {
+                type: 'doc',
+                route: '/docs/manage/administrator-guide/security-and-compliance/saml-authentication',
+                label: 'SAML',
+              },
+            ],
+          },
+          {
+            type: 'category',
+            label: 'Configuration',
+            route: '/docs/operate/configuration',
+            isExpanded: false,
+            items: [
+              {
+                type: 'doc',
+                route: '/docs/manage/administrator-guide/configuration/smtp-email-invitations',
+                label: 'Enable SMTP for Email Invitations',
+              },
+              {
+                type: 'doc',
+                isExpanded: false,
+                label: 'Alertmanager',
+                route: '/docs/manage/administrator-guide/configuration/alertmanager',
+              },
+            ],
+          },
+
+          {
+            type: 'doc',
+            route: '/docs/tutorial/opentelemetry-operator-usage',
+            label: 'OpenTelemetry Operator Usage',
+          },
+          {
+            type: 'doc',
+            route: '/docs/tutorial/setting-up-tls-for-signoz',
+            label: 'Secure SigNoz in Kubernetes using Ingress-NGINX and Cert-Manager',
+          },
+          {
+            type: 'doc',
+            route: '/docs/userguide/retention-period',
+            label: 'Retention Period',
+          },
+          {
+            type: 'doc',
+            route: '/docs/tutorial/infinite-retention-aws-s3',
+            label: 'Infinite Retention using AWS S3',
+          },
+          {
+            type: 'doc',
+            route: '/docs/tutorial/s3-integration-iam-role-eks',
+            label: 'S3 Integration With AWS IAM role in EKS',
+          },
+          {
+            type: 'doc',
+            route: '/docs/tutorial/oci-bucket-cold-storage-integration',
+            label: 'OCI Bucket Cold Storage Integration',
+          },
+          {
+            type: 'doc',
+            route: '/docs/userguide/otlp-http-enable-cors',
+            label: 'CORS in OTLP HTTP Receiver',
+          },
+          {
+            type: 'doc',
+            route: '/docs/operate/reset-admin-password',
+            label: 'Reset Admin Password',
+          },
+        ],
       },
     ],
   },
+
   {
     label: 'APM & Distributed Tracing',
     type: 'category',
     isExpanded: false,
-    // route: '',
+    route: '/docs/instrumentation/overview',
     items: [
       {
         type: 'doc',
@@ -146,7 +510,7 @@ const docsSideNav = [
         // type: 'generated-index',
         // title: 'Instrument your Application',
         // description:
-        // 'To instrument your applications and send data to SigNoz, follow the instructions in the sections below.',
+        // 'To instrument your application with OpenTelemetry and send data to SigNoz, follow the instructions in the sections below.',
         // slug: '/docs/instrumentation/index',
         // },
         items: [
@@ -215,6 +579,12 @@ const docsSideNav = [
               },
               {
                 type: 'doc',
+                route: '/docs/instrumentation/opentelemetry-quarkus',
+                label: 'Quarkus',
+                className: 'new-doc',
+              },
+              {
+                type: 'doc',
                 route: '/docs/instrumentation/tomcat',
                 label: 'Tomcat',
               },
@@ -258,6 +628,16 @@ const docsSideNav = [
                 route: '/docs/instrumentation/nextjs',
                 label: 'NextJS',
               },
+              {
+                type: 'doc',
+                route: '/docs/instrumentation/opentelemetry-reactjs',
+                label: 'ReactJS',
+              },
+              {
+                type: 'doc',
+                route: '/docs/instrumentation/opentelemetry-nuxtjs',
+                label: 'NuxtJS',
+              },
             ],
           },
           {
@@ -292,8 +672,23 @@ const docsSideNav = [
           },
           {
             type: 'doc',
+            label: 'C++',
+            route: '/docs/instrumentation/opentelemetry-cpp',
+          },
+          {
+            type: 'doc',
             label: 'Swift',
             route: '/docs/instrumentation/swift',
+          },
+          {
+            type: 'doc',
+            route: '/docs/instrumentation/opentelemetry-nginx',
+            label: 'NGINX',
+          },
+          {
+            type: 'doc',
+            route: '/docs/instrumentation/opentelemetry-wordpress',
+            label: 'WordPress',
           },
           {
             type: 'category',
@@ -333,7 +728,7 @@ const docsSideNav = [
           //   // type: 'doc',
           //   // },
           //   items: [
-                  
+
           //   ],
           // },
         ],
@@ -365,7 +760,7 @@ const docsSideNav = [
             items: [
               {
                 type: 'doc',
-                label: 'Span Details',
+                label: 'Trace Details',
                 route: '/docs/userguide/span-details',
               },
             ],
@@ -443,38 +838,23 @@ const docsSideNav = [
     items: [
       {
         type: 'doc',
-        route: '/docs/userguide/send-metrics-cloud',
-        label: 'Send Metrics to SigNoz Cloud',
+        route: '/docs/infrastructure-monitoring/overview',
+        label: 'Overview',
       },
-      {
-        type: 'doc',
-        route: '/docs/userguide/send-metrics',
-        label: 'Send Metrics (Self Hosted)',
-      },
-      {
-        type: 'doc',
-        route: '/docs/userguide/drop-metrics',
-        label: 'Drop Metrics',
-      },
-      {
-        type: 'doc',
-        route: '/docs/userguide/navigate-user-interface',
-        label: 'Navigate the User Interface',
-      },
+      // {
+      //   type: 'doc',
+      //   route: '/docs/userguide/navigate-user-interface',
+      //   label: 'Navigate the User Interface',
+      // },
       {
         type: 'doc',
         route: '/docs/userguide/hostmetrics',
-        label: 'Hostmetrics Dashboard',
+        label: 'Host Setup',
       },
       {
         type: 'doc',
-        route: '/docs/userguide/collecting-ecs-logs-and-metrics',
-        label: 'ECS Infra Metrics & Logs',
-      },
-      {
-        type: 'doc',
-        route: '/docs/userguide/collecting-ecs-sidecar-infra',
-        label: 'ECS Infra Sidecar',
+        route: '/docs/userguide/k8s-metrics',
+        label: 'Kubernetes Metrics',
       },
     ],
   },
@@ -482,7 +862,7 @@ const docsSideNav = [
     label: 'Logs Management',
     type: 'category',
     isExpanded: false,
-    // route: '',
+    route: '/docs/userguide/logs',
     items: [
       {
         type: 'doc',
@@ -493,6 +873,7 @@ const docsSideNav = [
         type: 'category',
         isExpanded: false,
         label: 'Send Logs to SigNoz',
+        route: '/docs/logs-management/send-logs-to-signoz',
         items: [
           {
             type: 'doc',
@@ -525,6 +906,11 @@ const docsSideNav = [
             label: 'Syslogs',
           },
           {
+            type: 'doc',
+            route: '/docs/logs-management/send-logs/logrus-to-signoz',
+            label: 'Logrus',
+          },
+          {
             type: 'category',
             isExpanded: false,
             label: 'Application Logs',
@@ -555,12 +941,17 @@ const docsSideNav = [
                 route: '/docs/logs-management/send-logs/aws-lambda-nodejs',
                 label: 'AWS Lambda Node.js logs',
               },
+              {
+                type: 'doc',
+                route: '/docs/logs-management/send-logs/nodejs-pino-logs',
+                label: 'Pino Node.js logs',
+              },
+              {
+                type: 'doc',
+                route: '/docs/logs-management/send-logs/nodejs-winston-logs',
+                label: 'Winston Node.js logs',
+              },
             ],
-          },
-          {
-            type: 'doc',
-            route: '/docs/userguide/collecting_nodejs_winston_logs',
-            label: 'NodeJS Winston logs',
           },
           {
             type: 'doc',
@@ -597,9 +988,13 @@ const docsSideNav = [
           },
           {
             type: 'doc',
-            route:
-              '/docs/logs-management/send-logs/vector-logs-to-signoz',
+            route: '/docs/logs-management/send-logs/vector-logs-to-signoz',
             label: 'Vector',
+          },
+          {
+            type: 'doc',
+            route: '/docs/logs-management/send-logs/zap-to-signoz',
+            label: 'Zap',
           },
           {
             type: 'doc',
@@ -650,6 +1045,16 @@ const docsSideNav = [
                 route: '/docs/logs-pipelines/guides/trace',
                 label: 'Parse Trace Information',
               },
+              {
+                type: 'doc',
+                route: '/docs/logs-pipelines/guides/resource',
+                label: 'Parse Container Name',
+              },
+              {
+                type: 'doc',
+                route: '/docs/logs-pipelines/guides/nested-json',
+                label: 'Parse Nested JSON',
+              },
             ],
           },
         ],
@@ -669,6 +1074,11 @@ const docsSideNav = [
             type: 'doc',
             route: '/docs/userguide/logs_query_builder',
             label: 'Logs Query Builder',
+          },
+          {
+            type: 'doc',
+            route: '/docs/logs-management/features/logs-quick-filters',
+            label: 'Logs Quick Filters',
           },
         ],
       },
@@ -718,14 +1128,14 @@ const docsSideNav = [
           {
             type: 'doc',
             route: '/docs/logs-management/guides/pii-scrubbing',
-            label: 'PII Scrubbing'
+            label: 'PII Scrubbing',
           },
           {
             type: 'doc',
             route: '/docs/userguide/parse-multiline-logs',
             label: 'Parse Multiline Logs',
           },
-        ]
+        ],
       },
       {
         type: 'doc',
@@ -752,6 +1162,16 @@ const docsSideNav = [
     items: [
       {
         type: 'doc',
+        route: '/docs/userguide/send-metrics-cloud',
+        label: 'Send Metrics to SigNoz Cloud',
+      },
+      {
+        type: 'doc',
+        route: '/docs/userguide/send-metrics',
+        label: 'Send Metrics (Self Hosted)',
+      },
+      {
+        type: 'doc',
         route: '/docs/metrics-management/types-and-aggregation',
         label: 'Types and Aggregation',
       },
@@ -774,6 +1194,39 @@ const docsSideNav = [
         type: 'doc',
         route: '/docs/metrics-management/k8s-infra-otel-config',
         label: 'Configure k8s-infra otelDeployment to collect metrics from receivers',
+      },
+      {
+        type: 'doc',
+        className: 'new-doc',
+        route: '/docs/metrics-management/docker-container-metrics',
+        label: 'Docker container metrics',
+      },
+      {
+        type: 'doc',
+        route: '/docs/userguide/drop-metrics',
+        label: 'Drop Metrics',
+      },
+      {
+        type: 'doc',
+        route: '/docs/metrics-management/query-range-api',
+        label: 'Query Range API',
+      },
+      {
+        type: 'category',
+        label: 'Guides',
+        isExpanded: false,
+        items: [
+          {
+            type: 'doc',
+            route: '/docs/userguide/collecting-ecs-logs-and-metrics',
+            label: 'ECS Infra Metrics & Logs',
+          },
+          {
+            type: 'doc',
+            route: '/docs/userguide/collecting-ecs-sidecar-infra',
+            label: 'ECS Infra Sidecar',
+          },
+        ],
       },
     ],
   },
@@ -934,6 +1387,21 @@ const docsSideNav = [
           },
           {
             type: 'doc',
+            route: '/docs/alerts-management/notification-channel/incident-io',
+            label: 'Incident.io (Prometheus Alertmanager Webhook)',
+          },
+          {
+            type: 'doc',
+            route: '/docs/alerts-management/notification-channel/rootly',
+            label: 'Rootly (Prometheus Alertmanager Webhook)',
+          },
+          {
+            type: 'doc',
+            route: '/docs/alerts-management/notification-channel/zenduty',
+            label: 'Zenduty (Prometheus Alertmanager Webhook)',
+          },
+          {
+            type: 'doc',
             route: '/docs/alerts-management/notification-channel/pagerduty',
             label: 'PagerDuty',
           },
@@ -989,15 +1457,24 @@ const docsSideNav = [
         route: '/docs/alerts-management/alerts-history',
         label: 'Alerts History',
       },
+      {
+        type: 'doc',
+        route: '/docs/alerts-management/terraform-provider-signoz',
+        label: 'Terraform Provider',
+      },
     ],
   },
   {
     label: 'Frontend & Mobile Monitoring',
     type: 'category',
     isExpanded: false,
-    className: 'new-doc',
     route: '/docs/frontend-and-mobile-monitoring',
     items: [
+      {
+        type: 'doc',
+        route: '/docs/frontend-monitoring/document-load',
+        label: 'Document Load',
+      },
       {
         type: 'doc',
         route: '/docs/frontend-monitoring/web-vitals',
@@ -1023,7 +1500,7 @@ const docsSideNav = [
         label: 'Flutter',
         route: '/docs/instrumentation/mobile-instrumentation/flutter',
       },
-     ],
+    ],
   },
   {
     label: 'Integrations',
@@ -1032,6 +1509,29 @@ const docsSideNav = [
     className: 'new-doc',
     route: '/docs/integrations/integrations-list',
     items: [
+      {
+        label: 'Temporal',
+        type: 'category',
+        className: 'new-doc',
+        isExpanded: false,
+        items: [
+          {
+            type: 'doc',
+            route: '/docs/integrations/temporal-cloud-metrics',
+            label: 'Cloud Metrics',
+          },
+          {
+            type: 'doc',
+            route: '/docs/integrations/temporal-golang-opentelemetry',
+            label: 'Golang',
+          },
+          {
+            type: 'doc',
+            route: '/docs/integrations/temporal-typescript-opentelemetry',
+            label: 'Typescript',
+          },
+        ],
+      },
       {
         type: 'doc',
         route: '/docs/integrations/redis',
@@ -1077,16 +1577,119 @@ const docsSideNav = [
   {
     label: 'Messaging Queues',
     type: 'category',
+    isExpanded: false,
+    // route: '',
+    items: [
+      {
+        type: 'doc',
+        route: '/docs/messaging-queues/overview',
+        label: 'Overview',
+      },
+      {
+        label: 'Kafka',
+        type: 'category',
+        isExpanded: false,
+        items: [
+          {
+            type: 'doc',
+            route: '/docs/messaging-queues/kafka-overview',
+            label: 'Overview',
+          },
+          {
+            label: 'Setup',
+            type: 'category',
+            isExpanded: false,
+            route: '/docs/messaging-queues/kafka-setup',
+            items: [
+              {
+                type: 'doc',
+                route: '/docs/messaging-queues/kafka',
+                label: 'Self-Hosted Kafka',
+              },
+              {
+                type: 'doc',
+                route: '/docs/messaging-queues/msk',
+                label: 'Amazon MSK',
+              },
+              {
+                type: 'doc',
+                route: '/docs/messaging-queues/strimzi',
+                label: 'Strimzi',
+              },
+              {
+                type: 'doc',
+                route: '/docs/messaging-queues/confluent-kafka',
+                label: 'Confluent Kafka',
+              },
+            ],
+          },
+        ],
+      },
+      {
+        label: 'Celery',
+        type: 'category',
+        isExpanded: false,
+        //className: 'new-doc',
+        //route: '/docs/integrations/integrations-list',
+        items: [
+          {
+            type: 'doc',
+            route: '/docs/messaging-queues/celery-overview',
+            label: 'Overview',
+          },
+          {
+            label: 'Setup',
+            type: 'doc',
+            route: '/docs/messaging-queues/celery-setup',
+          },
+        ],
+      },
+    ],
+  },
+  {
+    label: 'External API Monitoring',
+    type: 'category',
     className: 'new-doc',
     isExpanded: false,
     // route: '',
     items: [
       {
         type: 'doc',
-        route: '/docs/messaging-queues/kafka',
-        label: 'Kafka',
+        route: '/docs/external-api-monitoring/overview',
+        label: 'Overview',
       },
-     ],
+      {
+        type: 'doc',
+        route: '/docs/external-api-monitoring/setup',
+        label: 'Setup',
+      },
+    ]
+  },
+  {
+    label: 'CICD Monitoring',
+    type: 'category',
+    className: 'new-doc',
+    isExpanded: false,
+    // route: '',
+    items: [
+      {
+        label: 'GitHub',
+        type: 'category',
+        isExpanded: false,
+        items: [
+          {
+            type: 'doc',
+            route: '/docs/cicd/github/github-metrics',
+            label: 'Metrics',
+          },
+          {
+            type: 'doc',
+            route: '/docs/cicd/github/github-actions-traces',
+            label: 'Traces',
+          },
+        ],
+      },
+    ],
   },
   {
     type: 'doc',
@@ -1097,35 +1700,6 @@ const docsSideNav = [
     type: 'doc',
     route: '/docs/userguide/exceptions',
     label: 'Monitoring Exceptions',
-  },
-  {
-    label: 'Security & Compliance',
-    type: 'category',
-    isExpanded: false,
-    // route: '',
-    items: [
-      //     'userguide/overview',
-      {
-        type: 'doc',
-        route: '/docs/userguide/authentication',
-        label: 'Authentication',
-      },
-      {
-        type: 'doc',
-        route: '/docs/userguide/sso-authentication',
-        label: 'SSO & SAML',
-      },
-      {
-        type: 'doc',
-        route: '/docs/userguide/retention-period',
-        label: 'Retention Period',
-      },
-      {
-        type: 'doc',
-        route: '/docs/userguide/otlp-http-enable-cors',
-        label: 'CORS in OTLP HTTP Receiver',
-      },
-    ],
   },
   {
     label: 'Ingestion',
@@ -1186,43 +1760,13 @@ const docsSideNav = [
       },
       {
         type: 'doc',
-        route: '/docs/tutorial/s3-integration-iam-role-eks',
-        label: 'S3 Integration With AWS IAM role in EKS',
-      },
-      {
-        type: 'doc',
-        route: '/docs/tutorial/oci-bucket-cold-storage-integration',
-        label: 'OCI Bucket Cold Storage Integration',
-      },
-      {
-        type: 'doc',
-        route: '/docs/tutorial/opentelemetry-operator-usage',
-        label: 'OpenTelemetry Operator Usage',
-      },
-      {
-        type: 'doc',
-        route: '/docs/tutorial/setting-up-tls-for-signoz',
-        label: 'Secure SigNoz in Kubernetes using Ingress-NGINX and Cert-Manager',
-      },
-      {
-        type: 'doc',
         route: '/docs/tutorial/setting-up-sso-saml-with-keycloak',
         label: 'Setting Up SSO SAML 2.0 With Keycloak',
       },
       {
         type: 'doc',
-        route: '/docs/tutorial/writing-clickhouse-queries-in-dashboard',
-        label: 'ClickHouse queries for building dashboards and alerts',
-      },
-      {
-        type: 'doc',
         route: '/docs/tutorial/traefik-observability',
         label: 'Traefik Observability',
-      },
-      {
-        type: 'doc',
-        route: '/docs/tutorial/infinite-retention-aws-s3',
-        label: 'Infinite Retention using AWS S3',
       },
     ],
   },
@@ -1300,9 +1844,21 @@ const docsSideNav = [
         label: 'RDS',
       },
       {
-        type: 'doc',
-        route: '/docs/aws-monitoring/lambda-logs',
+        type: 'category',
+        isExpanded: false,
         label: 'AWS Lambda',
+        items: [
+          {
+            type: 'doc',
+            route: '/docs/aws-monitoring/lambda/lambda-logs',
+            label: 'Logging',
+          },
+          {
+            type: 'doc',
+            route: '/docs/aws-monitoring/lambda/lambda-traces',
+            label: 'APM & Tracing',
+          },
+        ],
       },
     ],
   },
@@ -1320,11 +1876,45 @@ const docsSideNav = [
     ],
   },
   {
+    label: 'Migrate From LGTM Stack',
+    className: 'new-doc',
+    type: 'category',
+    isExpanded: false,
+    route: '/docs/migration/migrate-from-grafana',
+    items: [
+      {
+        type: 'doc',
+        route: '/docs/migration/migrate-from-grafana/metrics',
+        label: 'Migrating Metrics',
+      },
+      {
+        type: 'doc',
+        route: '/docs/migration/migrate-from-grafana/traces',
+        label: 'Migrating Traces',
+      },
+      {
+        type: 'doc',
+        route: '/docs/migration/migrate-from-grafana/logs',
+        label: 'Migrating Logs',
+      },
+      {
+        type: 'doc',
+        route: '/docs/migration/migrate-from-grafana/dashboards',
+        label: 'Migrating Dashboards',
+      },
+      {
+        type: 'doc',
+        route: '/docs/migration/migrate-from-grafana/alerts',
+        label: 'Migrating Alerts',
+      },
+    ],
+  },
+  {
     label: 'Azure Monitoring',
     type: 'category',
     isExpanded: false,
     // className: 'new-doc',
-    // route: '',
+    route: '/docs/azure-monitoring',
     items: [
       {
         type: 'category',
@@ -1476,7 +2066,7 @@ const docsSideNav = [
     type: 'category',
     isExpanded: false,
     // className: 'new-doc',
-    // route: '',
+    route: '/docs/gcp-monitoring',
     items: [
       {
         type: 'category',
@@ -1572,7 +2162,7 @@ const docsSideNav = [
             type: 'doc',
             route: '/docs/gcp-monitoring/compute-engine/tracing',
             label: 'APM & Tracing',
-          }
+          },
         ],
       },
       {
@@ -1613,7 +2203,7 @@ const docsSideNav = [
             type: 'doc',
             route: '/docs/gcp-monitoring/cloud-sql/metrics',
             label: 'Metrics',
-          }
+          },
         ],
       },
       {
@@ -1655,8 +2245,8 @@ const docsSideNav = [
             route: '/docs/gcp-monitoring/vpc/metrics',
             label: 'Metrics',
           },
-         ],
-       },
+        ],
+      },
       {
         label: 'GKE',
         type: 'category',
@@ -1669,7 +2259,7 @@ const docsSideNav = [
             label: 'APM & Tracing',
           },
           {
-            type: 'doc', 
+            type: 'doc',
             route: '/docs/gcp-monitoring/gke/gke-logging-and-metrics',
             label: 'Logs and Metrics',
           },
@@ -1687,17 +2277,17 @@ const docsSideNav = [
             label: 'Cloud Run Service Setup',
           },
           {
-            type: 'doc', 
+            type: 'doc',
             route: '/docs/gcp-monitoring/cloud-run/logging',
             label: 'Logging',
           },
           {
-            type: 'doc', 
+            type: 'doc',
             route: '/docs/gcp-monitoring/cloud-run/metrics',
             label: 'Metrics',
           },
           {
-            type: 'doc', 
+            type: 'doc',
             route: '/docs/gcp-monitoring/cloud-run/tracing',
             label: 'APM & Tracing',
           },
@@ -1710,7 +2300,7 @@ const docsSideNav = [
         route: '/docs/gcp-monitoring/cloud-monitoring',
         items: [
           {
-            type: 'doc', 
+            type: 'doc',
             route: '/docs/gcp-monitoring/cloud-monitoring/metrics',
             label: 'Metrics',
           },
@@ -1732,9 +2322,49 @@ const docsSideNav = [
     // },
     items: [
       {
-        type: 'doc',
-        route: '/docs/operate/configuration',
-        label: 'Configuration',
+        type: 'category',
+        isExpanded: false,
+        label: '<=0.75.0',
+        //route: '/docs/operate/migration',
+        // link: {
+        // type: 'generated-index',
+        // title: 'Migration Guides',
+        // description:
+        // 'The following sections provide instructions to migrate SigNoz components across newer versions. You need to run these migration scripts step by step. For example if you are currently on `0.8.2` and want to migrate to `0.10.0` - you need to run migration script for `0.9` first and then `0.10`',
+        // slug: '/docs/operate/migration/migration',
+        // },
+        items: [
+          {
+            type: 'doc',
+            route: '/docs/operate/0.75.0/configuration',
+            label: 'Configuration',
+          },
+          {
+            type: 'category',
+            isExpanded: false,
+            label: 'Query Service',
+            route: '/docs/operate/0.75.0/query-service',
+            // link: {
+            // type: 'generated-index',
+            // title: 'Query Service',
+            // description:
+            // 'The following sections provide instructions to operate Query Service. You can proceed to one of the sections below.',
+            // slug: '/docs/operate/query-service',
+            // },
+            items: [
+              {
+                type: 'doc',
+                route: '/docs/operate/0.75.0/query-service/reset-admin-password',
+                label: 'Reset Admin Password',
+              },
+              {
+                type: 'doc',
+                route: '/docs/operate/0.75.0/query-service/user-invitation-smtp',
+                label: 'Enable SMTP for User Invitations',
+              },
+            ],
+          },
+        ],
       },
       {
         type: 'doc',
@@ -1752,156 +2382,6 @@ const docsSideNav = [
         label: 'Kubernetes',
       },
       {
-        type: 'category',
-        isExpanded: false,
-        label: 'Migration Guides',
-        route: '/docs/operate/migration',
-        // link: {
-        // type: 'generated-index',
-        // title: 'Migration Guides',
-        // description:
-        // 'The following sections provide instructions to migrate SigNoz components across newer versions. You need to run these migration scripts step by step. For example if you are currently on `0.8.2` and want to migrate to `0.10.0` - you need to run migration script for `0.9` first and then `0.10`',
-        // slug: '/docs/operate/migration/migration',
-        // },
-        items: [
-          {
-            type: 'doc',
-            route: '/docs/operate/migration/upgrade-0.55',
-            label: 'Upgrade to v0.55',
-          },
-          {
-            type: 'doc',
-            route: '/docs/operate/migration/upgrade-0.51',
-            label: 'Upgrade to v0.51',
-          },
-          {
-            type: 'doc',
-            route: '/docs/operate/migration/upgrade-0.49',
-            label: 'Upgrade to v0.49',
-          },
-          {
-            type: 'doc',
-            route: '/docs/operate/migration/upgrade-0.45',
-            label: 'Upgrade to v0.45',
-          },
-          {
-            type: 'doc',
-            route: '/docs/operate/migration/upgrade-0.38',
-            label: 'Upgrade to v0.38',
-          },
-          {
-            type: 'doc',
-            route: '/docs/operate/migration/upgrade-0.36',
-            label: 'Upgrade to v0.36',
-          },
-          {
-            type: 'doc',
-            route: '/docs/operate/migration/upgrade-0.27',
-            label: 'Upgrade to v0.27',
-          },
-          {
-            type: 'doc',
-            route: '/docs/operate/migration/upgrade-0.23',
-            label: 'Upgrade to v0.23',
-          },
-          {
-            type: 'doc',
-            route: '/docs/operate/migration/upgrade-0.19',
-            label: 'Upgrade to v0.19',
-          },
-          {
-            type: 'doc',
-            route: '/docs/operate/migration/upgrade-0.12',
-            label: 'Upgrade to v0.12',
-          },
-          {
-            type: 'doc',
-            route: '/docs/operate/migration/upgrade-0.10',
-            label: 'Upgrade to v0.10',
-          },
-          {
-            type: 'doc',
-            route: '/docs/operate/migration/upgrade-0.9',
-            label: 'Upgrade to v0.9',
-          },
-          {
-            type: 'doc',
-            route: '/docs/operate/migration/upgrade-0.8.1',
-            label: 'Upgrade to v0.8.1',
-          },
-          {
-            type: 'doc',
-            route: '/docs/operate/migration/upgrade-0.8.0',
-            label: 'Upgrade to v0.8.0',
-          },
-        ],
-      },
-      {
-        type: 'category',
-        isExpanded: false,
-        label: 'ClickHouse',
-        route: '/docs/operate/clickhouse',
-        // link: {
-        // type: 'generated-index',
-        // title: 'ClickHouse',
-        // description:
-        // 'The following sections provide instructions to operate ClickHouse. Based on your environment, proceed to one of the sections below.',
-        // slug: '/operate/clickhouse/clickhouse',
-        // },
-        items: [
-          {
-            type: 'doc',
-            route: '/docs/operate/clickhouse/increase-clickhouse-pv',
-            label: 'Increase ClickHouse PV',
-          },
-          {
-            type: 'doc',
-            route: '/docs/operate/clickhouse/connect-to-clickhouse',
-            label: 'Connect to ClickHouse',
-          },
-          {
-            type: 'doc',
-            route: '/docs/operate/clickhouse/distributed-clickhouse',
-            label: 'Distributed ClickHouse',
-          },
-          {
-            type: 'doc',
-            route: '/docs/operate/clickhouse/external-clickhouse',
-            label: 'External ClickHouse',
-          },
-        ],
-      },
-      {
-        type: 'category',
-        isExpanded: false,
-        label: 'Query Service',
-        route: '/docs/operate/query-service',
-        // link: {
-        // type: 'generated-index',
-        // title: 'Query Service',
-        // description:
-        // 'The following sections provide instructions to operate Query Service. You can proceed to one of the sections below.',
-        // slug: '/docs/operate/query-service',
-        // },
-        items: [
-          {
-            type: 'doc',
-            route: '/docs/operate/query-service/reset-admin-password',
-            label: 'Reset Admin Password',
-          },
-          {
-            type: 'doc',
-            route: '/docs/operate/query-service/user-invitation-smtp',
-            label: 'Enable SMTP for User Invitations',
-          },
-        ],
-      },
-      {
-        type: 'doc',
-        route: '/docs/operate/feature-flags/',
-        label: 'Feature Flags',
-      },
-      {
         type: 'doc',
         route: '/docs/production-readiness',
         label: 'Best Practices for Production',
@@ -1914,18 +2394,8 @@ const docsSideNav = [
     label: 'About SigNoz',
     items: [
       {
-        route: '/docs/architecture',
-        label: 'Technical Architecture',
-        type: 'doc',
-      },
-      {
         route: '/docs/contributing',
         label: 'Contributing Guidelines',
-        type: 'doc',
-      },
-      {
-        route: '/docs/roadmap',
-        label: 'Product Roadmap',
         type: 'doc',
       },
       // 'about-signoz/architecture',
@@ -1937,7 +2407,6 @@ const docsSideNav = [
     route: '/docs/community/llm-monitoring',
     label: 'LLM Monitoring',
     type: 'doc',
-    className: 'new-doc',
   },
   {
     label: 'Community',

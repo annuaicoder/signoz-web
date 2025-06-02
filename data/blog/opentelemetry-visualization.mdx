@@ -2,12 +2,13 @@
 
 title: Getting Started with OpenTelemetry Visualization - A Practical Guide
 slug: opentelemetry-visualization
-date: 2024-10-01
+date: 2024-12-06
 tags: [OpenTelemetry, SigNoz]
 authors: [ankit_anand]
 description: Learn how to effectively visualize OpenTelemetry data for enhanced observability and monitoring in distributed systems. Explore tools, techniques, and best practices.
 image: /img/blog/2023/03/opentelemetry_visualization_cover-min.jpg
 keywords: [opentelemetry,opentelemetry visualization,opentelemetry specification,open source,logs,metrics,traces,signoz,apm tools,application performance monitoring]
+cta_text: "Create your Free Workspace"
 
 ---
 
@@ -151,7 +152,7 @@ keywords: [opentelemetry,opentelemetry visualization,opentelemetry specification
 
 OpenTelemetry is a Cloud Native Computing Foundation(<a href="https://www.cncf.io/" rel="noopener noreferrer nofollow" target="_blank">CNCF</a>) project aimed at standardizing the way we instrument applications for generating telemetry data(logs, metrics, and traces). However, OpenTelemetry does not provide storage and visualization for the collected telemetry data. For OpenTelemetry visualization, you need to use a backend that can ingest the collected data and provide a web UI to visualize it.
 
-<Figure src="/img/blog/2024/01/opentelemetry-collector-try-signoz-cloud-cta.webp" alt="" caption="" />
+[![Get Started - Free CTA](/img/launch_week/try-signoz-cloud-blog-cta.png)](https://signoz.io/teams/)
 
 ## Quick Start Guide: OpenTelemetry Visualization in 5 Steps
 
@@ -391,7 +392,9 @@ cd signoz/deploy/
 
 You can visit our documentation for instructions on how to install SigNoz using Docker Swarm and Helm Charts.
 
-<Figure src="/img/blog/2024/10/opentelemetry-visualization-deploy_docker_documentation.webp" alt="" caption="" />Once your application is instrumented with OpenTelemetry client libraries, the data can be sent to the SigNoz backend by specifying a specific port on the machine where SigNoz is installed.
+<Figure src="/img/blog/common/deploy_docker_documentation.webp" alt="" caption="" />
+
+Once your application is instrumented with OpenTelemetry client libraries, the data can be sent to the SigNoz backend by specifying a specific port on the machine where SigNoz is installed.
 
 You can then use Signoz to monitor application metrics with out-of-box charts and visualization.
 
@@ -510,7 +513,7 @@ As you implement OpenTelemetry visualization, you may encounter several challeng
     - Problem: Using multiple visualization tools can lead to fragmented insights and increased complexity.
     - Solution: Aim for a consolidated observability platform that can handle metrics, traces, and logs in a unified interface.
 6. **Alert Fatigue**:
-    - Problem: [Too many alerts](signoz.io/blog/alert-fatigue) can lead to important issues being overlooked.
+    - Problem: [Too many alerts](https://signoz.io/blog/alert-fatigue/) can lead to important issues being overlooked.
     - Solution: Use dynamic thresholds, implement alert grouping, and regularly review and refine your alerting rules.
 
 By anticipating and addressing these challenges, you can create a more effective and sustainable OpenTelemetry visualization strategy.

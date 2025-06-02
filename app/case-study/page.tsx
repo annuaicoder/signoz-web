@@ -33,8 +33,37 @@ type CardProps = {
 
 const cardDetails = [
   {
+    logo: '/img/case_study/brainfish-icon.svg',
+    title: 'How Brainfish leveraged SigNoz for effective Kubernetes monitoring & Logs management',
+    name: 'Charlie Shen',
+    position: 'Lead DevOps Engineer, Brainfish',
+    href: '/case-study/brainfish/',
+  },
+  {
+    logo: '/img/case_study/logos/linkcy-logo-white-1.png',
+    title: 'How Fintech Startup Linkcy Monitors Critical APIs with SigNoz Dashboards',
+    name: 'Alexandre Moray',
+    position: 'Senior Software Engineer',
+    href: '/case-study/linkcy/',
+  },
+  {
+    logo: '/img/case_study/cedana-logo.svg',
+    title: 'How Cedana Leverages SigNoz to Ensure Uptime in Real-Time Compute Operations',
+    name: 'Niranjan Ravichandra',
+    position: 'Co-founder & CTO, Cedana',
+    href: '/case-study/cedana/',
+  },
+  {
+    logo: '/img/case_study/logos/bands-logo.png',
+    title: 'How Bands Monitors 50+ Integrations for Thousands of Musicians Using SigNoz',
+    name: 'Shiv Ansal',
+    position: 'Co-founder & CTO, Bands',
+    href: '/case-study/bands/',
+  },
+  {
     logo: '/img/case_study/mailmodo-logo-white.svg',
-    title: 'How Mailmodo streamlined monitoring of 200GB+ daily logs from 200+ microservices with SigNoz',
+    title:
+      'How Mailmodo streamlined monitoring of 200GB+ daily logs from 200+ microservices with SigNoz',
     name: 'Avneesh Kumar',
     position: 'VP of Engineering, Mailmodo',
     href: '/case-study/mailmodo/',
@@ -45,27 +74,6 @@ const cardDetails = [
     name: 'Khushhal Reddy',
     position: 'Senior Backend Engineer, Kiwi',
     href: '/case-study/kiwi/',
-  },
-  {
-    logo: '/img/case_study/brainfish-icon.svg',
-    title: 'How Brainfish leveraged SigNoz for effective Kubernetes monitoring & Logs management',
-    name: 'Charlie Shen',
-    position: 'Lead DevOps Engineer, Brainfish',
-    href: '/case-study/brainfish/',
-  },
-  {
-    logo: '/img/case_study/logos/bands-logo.png',
-    title: 'How Bands Monitors 50+ Integrations for Thousands of Musicians Using SigNoz',
-    name: 'Shiv Ansal',
-    position: 'Co-founder & CTO, Bands',
-    href: '/case-study/bands/',
-  },
-  {
-    logo: '/img/case_study/cedana-logo.svg',
-    title: 'How Cedana Leverages SigNoz to Ensure Uptime in Real-Time Compute Operations',
-    name: 'Niranjan Ravichandra',
-    position: 'Co-founder & CTO, Cedana',
-    href: '/case-study/cedana/',
   },
   {
     logo: '/img/case_study/thehindu-logo.png',

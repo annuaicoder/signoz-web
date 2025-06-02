@@ -25,14 +25,32 @@ import VerticalTabs from './VerticalTabs/VerticalTabs'
 import FAQAccordion from './FAQAccordion/FAQAccordion'
 import Button from './Button/Button'
 import DatadogPricingCalculator from './DatadogPricingCalculator/DatadogPricingCalculator'
-import DatadogVsSigNoz from './DatadogVsSigNoz/DatadogVsSigNoz' 
+import DatadogVsSigNoz from './DatadogVsSigNoz/DatadogVsSigNoz'
+import GrafanaVsSigNoz from './GrafanaVsSigNoz/GrafanaVsSigNoz'
+import NewRelicVsSigNoz from './NewRelicVsSigNoz/NewRelicVsSigNoz'
 import DatadogAlternativesFinder from './DatadogAlternativesFinder/DatadogAlternativesFinder'
+import KeyPointCallout from './KeyPointCallout/KeyPointCallout'
+import GetStartedOpenTelemetryButton from './GetStartedOpenTelemetryButton/GetStartedOpenTelemetryButton'
+import InterlinkCard from './InterlinkCard/InterlinkCard'
+import InArticleVideoShowcaseModal from './InArticleVideoShowcaseModal/InArticleVideoShowcaseModal'
+import GetStartedInfrastructureMonitoring from './GetStartedInfrastructureMonitoring/GetStartedInfrastructureMonitoring'
+import ImageCTA from './ImageCTA/ImageCTA'
+import TrackingLink from './TrackingLink'
+import APMQuickStartOverview from './APM/APMQuickStartOverview'
+import APMInstrumentationListicle from './APM/APMInstrumentationListicle'
+import MDXButton from './MDXButton/MDXButton'
+import IconCardGrid from './Card/IconCardGrid'
+import LogsQuickStartOverview from './Logs/LogsQuickStartOverview'
+import LogsInstrumentationListicle from './Logs/LogsInstrumentationListicle'
+import IntegrationsListicle from './Integrations/IntegrationsListicle'
+import HostingDecision from './shared/HostingDecision'
+import SelfHostInstallationListicle from './Setup/SelfHostInstallationListicle'
 
 export const components: MDXComponents = {
   Image,
   TOCInline,
   a: CustomLink,
-  pre: Pre,   
+  pre: Pre,
   table: TableWrapper,
   BlogNewsletterForm,
   YouTube,
@@ -56,5 +74,23 @@ export const components: MDXComponents = {
   Button,
   DatadogPricingCalculator,
   DatadogVsSigNoz,
+  GrafanaVsSigNoz,
+  NewRelicVsSigNoz,
   DatadogAlternativesFinder,
+  KeyPointCallout,
+  GetStartedOpenTelemetryButton,
+  InterlinkCard,
+  InArticleVideoShowcaseModal,
+  GetStartedInfrastructureMonitoring,
+  ImageCTA,
+  TrackingLink,
+  APMQuickStartOverview,
+  APMInstrumentationListicle,
+  MDXButton,
+  IconCardGrid,
+  LogsQuickStartOverview,
+  LogsInstrumentationListicle,
+  IntegrationsListicle,
+  HostingDecision,
+  SelfHostInstallationListicle,
 }

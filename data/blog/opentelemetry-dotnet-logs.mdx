@@ -8,6 +8,8 @@ description: OpenTelemetry can help you collect logs from .NET applications. You
 image: /img/blog/2023/11/opentelemetry-dotnet-logs-cover.jpeg
 hide_table_of_contents: false
 keywords: [opentelemetry,signoz,observability,logs,dotnet]
+cta_title: "Set Up OpenTelemetry with .NET in 15 min with Our Guided Onboarding"
+cta_text: "Monitor .NET with OTel"
 ---
 
 <head>
@@ -108,7 +110,7 @@ builder.Logging.AddOpenTelemetry(logging => {
                    otlpOptions.Protocol = OtlpExportProtocol.Grpc;
                    otlpOptions.Endpoint = new Uri("https://ingest.in.signoz.cloud:443/");
 
-                   string headerKey = "signoz-access-token";
+                   string headerKey = "signoz-ingestion-key";
                    string headerValue = "<SIGNOZ_INGESTION_KEY>";
 
                    otlpOptions.Headers = $"{headerKey}={headerValue}";
@@ -235,7 +237,7 @@ builder.Logging.AddOpenTelemetry(logging => {
                .AddOtlpExporter(otlpOptions => {
                    otlpOptions.Protocol = OtlpExportProtocol.Grpc;
                    otlpOptions.Endpoint = new Uri("https://ingest.in.signoz.cloud:443/");
-                   string headerKey = "signoz-access-token";
+                   string headerKey = "signoz-ingestion-key";
                    string headerValue = "<SIGNOZ_INGESTION_KEY>";
                    otlpOptions.Headers = $"{headerKey}={headerValue}";
                });
@@ -251,7 +253,7 @@ builder.Services.AddOpenTelemetry().WithTracing(tracing =>
         {
             otlpOptions.Protocol = OtlpExportProtocol.Grpc;
             otlpOptions.Endpoint = new Uri("https://ingest.in.signoz.cloud:443/");
-            string headerKey = "signoz-access-token";
+            string headerKey = "signoz-ingestion-key";
             string headerValue = "<SIGNOZ_INGESTION_KEY>";
             otlpOptions.Headers = $"{headerKey}={headerValue}";
         });
@@ -346,7 +348,7 @@ dotnet add package OpenTelemetry.Exporter.Console
            otlpOptions.Protocol = OtlpExportProtocol.Grpc;
 
 					//SigNoz Cloud account Ingestion key
-           string headerKey = "signoz-access-token";
+           string headerKey = "signoz-ingestion-key";
            string headerValue = "<SIGNOZ_INGESTION_KEY>";
 
            string formattedHeader = $"{headerKey}={headerValue}";
