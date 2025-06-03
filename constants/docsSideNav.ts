@@ -1510,6 +1510,19 @@ const docsSideNav = [
     route: '/docs/integrations/integrations-list',
     items: [
       {
+        type: 'category',
+        isExpanded: false,
+        label: 'One Click Integrations (AWS)',
+        items: [
+          {
+            type: 'doc',
+            route: '/docs/integrations/aws/s3-sync',
+            className: 'new-doc',
+            label: 'S3 Sync',
+          }
+        ],
+      },
+      {
         label: 'Temporal',
         type: 'category',
         className: 'new-doc',
@@ -1863,17 +1876,30 @@ const docsSideNav = [
     ],
   },
   {
-    label: 'Migrate From Datadog',
+    label: 'Migrate to SigNoz',
     type: 'category',
     isExpanded: false,
     route: '/docs/migration/migrate-from-datadog',
     items: [
       {
-        type: 'doc',
-        route: '/docs/migration/opentelemetry-datadog-receiver',
-        label: 'Using Datadog OTLP receiver',
+        label: 'From Datadog',
+        type: 'category',
+        isExpanded: false,
+        route: '/docs/migration/migrate-from-datadog',
+        items: [
+          {
+            type: 'doc',
+            route: '/docs/migration/opentelemetry-datadog-receiver',
+            label: 'Using Datadog OTLP receiver',
+          },
+        ],
       },
-    ],
+      {
+        type: 'doc',
+        route: '/docs/migration/migrate-to-signoz-cloud',
+        label: 'From SigNoz OSS to Cloud',
+      },
+    ]
   },
   {
     label: 'Migrate From LGTM Stack',
